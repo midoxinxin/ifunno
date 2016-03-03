@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ifun</title>
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+  <link rel="stylesheet" type="text/css" href="css/news.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="page1">
+  <div data-role="header" data-position="fixed">
+   <h1><img src="img/logo2.gif" alt="jQuery Mobile">News</h1>
+  </div>
+  <div role="main" class="ui-content">
+
+                    <div id="content" class="content-wrapper">
+            <div>
+            </div>
+        </div>
+        <div id="loadmore" class="bottom">上拉查看更多新闻</div>
+  </div>
+  <div data-role="footer" data-position="fixed">
+   <div data-role="navbar">
+      <ul>
+        <li><a href="#page1" data-icon="star" class="ui-btn-active">News</a></li>
+        <li><a href="#page2" data-icon="cloud" >Weather</a></li>
+        <li><a href="joker.html" rel="external" data-icon="heart">Joker</a></li>
+        <li><a href="map.html" rel="external" data-icon="location">Nav</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /footer -->
+</div><!-- /page 1 -->
+
+<div data-role="page" id="page2">
+  <div data-role="header" data-position="fixed">
+    <h1><img src="img/logo2.gif" alt="jQuery Mobile">Weather</h1>
+  </div>
+  <div role="main" class="ui-content" >
+                    <span id="city"></span>&nbsp;&nbsp;
+                    <span id="date" style="font-size: 0.6rem"></span>
+                    <div id="weather">
+                        <div id="day" class="weatherPart"></div>
+                        <div id="day2" class="weatherPart" style="display:none"><hr>
+                        <div id="date2"></div>
+                        </div>
+                    </div>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <div data-role="navbar">
+      <ul>
+      
+        <li><a href="#page1" data-icon="star">News</a></li>
+        <li><a href="#" data-icon="cloud" class="ui-btn-active">Weather</a></li>
+        <li><a href="joker.html" rel="external" data-icon="heart">Joker</a></li>
+        <li><a href="map.html" rel="external" data-icon="location">Nav</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /footer -->
+</div><!-- /page 2-->
+
+<script src="http://cdn.bootcss.com/zepto/1.1.4/zepto.min.js"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+     <script src="js/joker.js" type="text/javascript" charset="utf-8"></script> 
+    <script src="js/news.js" type="text/javascript" charset="utf-8"></script> 
+    <script src="js/weather.js" type="text/javascript" charset="utf-8"></script>
+    <!-- JiaThis Button BEGIN -->
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jiathis_r.js?move=0&amp;btn=r2.gif" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+ 
+</body>
+</html>

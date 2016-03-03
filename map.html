@@ -1,0 +1,131 @@
+						
+<!DOCTYPE HTML>
+<html style="height:100%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, minimal-ui" />
+<title>ifun地图</title>
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="page4">
+	<header>
+		<div>
+			<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext"></button>
+		</div>
+		<div>
+			<span><img src="img/logo2.gif" alt="jQuery Mobile">位置定位</span>
+		</div>
+	</header>
+	
+	<div class="float_div" id="localtion">
+		定位
+	</div>
+	
+	<div id="panner">
+		<div id="r_title"><b>定位结果:</b></div>
+	    <div id="result"></div>
+	</div>
+	
+	<div id="map"></div>
+	</div>	
+</body>
+<script language="javascript" src="http://webapi.amap.com/maps?v=1.3&key=e8496e8ac4b0f01100b98da5bde96597"></script>
+<script id="amap_main_js" src="http://webapi.amap.com/maps/main?v=1.3&key=e8496e8ac4b0f01100b98da5bde96597&m=http,map,anip,layers,overlay0,brender,mrender,touch,vectorlayer,overlay,vp,sync&vrs=1.3.12.1" type="text/javascript"></script>
+<script type="text/javascript">
+	(function (){
+		var mapHeight = document.body.clientHeight - 200;
+		document.getElementById('map').style.height = mapHeight + 'px';
+		var map = new AMap.Map('map'), geolocation = null, result = document.getElementById('result');
+		map.plugin(['AMap.Scale'], function(){
+					var scale  = new AMap.Scale();
+					map.addControl(scale);
+				});
+				
+				map.plugin(['AMap.MapType'], function(){
+					var type =  new AMap.MapType();
+					map.addControl(type);
+				});
+		map.plugin('AMap.Geolocation', function () {
+			geolocation = new AMap.Geolocation({
+				enableHighAccuracy: true,//是否使用高精度定位，默认:true
+				timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+				maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+				convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+				showButton: true,        //显示定位按钮，默认：true
+				buttonPosition: 'LB',    //定位按钮停靠位置，默认：'LB'，左下角
+				buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+				showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+				showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+				panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+				zoomToAccuracy:true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+			});
+	        map.addControl(geolocation);
+			AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+			AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+		});
+		
+		/*
+		 *获取当前位置信息
+		 */
+		function getCurrentPosition () {
+			geolocation.getCurrentPosition();
+		};
+		/*
+		 *监控当前位置并获取当前位置信息
+		 */
+		function watchPosition () {
+			geolocation.watchPosition();
+		};
+		/*
+		 *解析定位结果
+		 */
+		function onComplete (data) {
+			var str = '<p>定位成功</p>';
+			str += '<span>经度：' + data.position.getLng() + '</span>'+" &nbsp; &nbsp;";
+			str += '<span>纬度：' + data.position.getLat() + '</span>'+" &nbsp; &nbsp;"; 
+			str += '<span>精度：' + data.accuracy + ' 米</span>';
+			str += '<p>是否经过偏移：' + (data.isConverted ? '是' : '否') + '</p>';
+			result.innerHTML = str;
+		};
+		/*
+		 *解析定位错误信息
+		 */
+		function onError (data) {
+			var str = '<p>定位失败</p>';
+			str += '<p>错误信息：'
+			switch(data.info) {
+				case 'PERMISSION_DENIED':
+					str += '浏览器阻止了定位操作';
+					break;
+				case 'POSITION_UNAVAILBLE':
+					str += '无法获得当前位置';
+					break;
+				case 'TIMEOUT':
+					str += '定位超时';
+					break;
+				default:
+					str += '未知错误';
+					break;
+			}
+			str += '</p>';
+			result.innerHTML = str;
+		};
+		
+		document.getElementById('localtion').onclick = function(){
+			getCurrentPosition();
+		};
+		
+		document.getElementById('visit').onclick = function(){
+			watchPosition();
+		};
+		
+	})();
+	
+</script>
+</html>						
+
+	
